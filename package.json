@@ -10,7 +10,7 @@
     "build": "yarn prismix && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "yarn prismix && nest start --watch",
+    "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -21,12 +21,21 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/apollo": "^10.1.7",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/graphql": "^10.1.7",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.1.4",
     "@prisma/client": "^4.8.0",
+    "apollo-server-express": "^3.11.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "graphql": "^16.6.0",
+    "joi": "^17.7.0",
+    "prisma-class-validator-generator": "^0.2.0",
+    "prisma-joi-generator": "^0.2.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
@@ -51,6 +60,7 @@
     "supertest": "^6.1.3",
     "ts-jest": "29.0.3",
     "ts-loader": "^9.2.3",
+    "ts-morph": "^17.0.1",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "4.1.1",
     "typescript": "^4.7.4"

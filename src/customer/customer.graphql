@@ -1,0 +1,64 @@
+scalar Date
+
+type Customer {
+  id: ID!
+  email: String!
+  name: String!
+  address: AddressType!
+  phoneNumber: String!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type AddressType {
+  street: String!
+  city: String!
+  state: String!
+  country: String!
+  zipCode: String!
+  coordinates: [String!]!
+}
+
+input CreateCustomerAddressInput {
+  street: String!
+  city: String!
+  state: String!
+  country: String!
+  zipCode: String!
+  coordinates: [String!]!
+}
+
+input UpdateCustomerAddressInput {
+  street: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  coordinates: [String!]
+}
+
+input CreateCustomerInput {
+  email: String!
+  name: String!
+  address: CreateCustomerAddressInput!
+  phoneNumber: String!
+}
+
+input UpdateCustomerInput {
+  id: ID!
+  email: String
+  name: String
+  address: CreateCustomerAddressInput
+  phoneNumber: String
+}
+
+type Query {
+  customers: [Customer]!
+  customer(id: ID!): Customer
+}
+
+type Mutation {
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  removeCustomer(id: ID!): Customer
+}

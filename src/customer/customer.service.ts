@@ -1,20 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/resources/prisma.service';
-import { Customer, Prisma } from '@prisma/client';
+import { PrismaService } from 'src/resources/prisma/prisma.service';
+import { CreateCustomerInput, UpdateCustomerInput } from 'src/types/graphql';
 
 @Injectable()
 export class CustomerService {
   constructor(private prisma: PrismaService) {}
 
-  getAll = async (): Promise<Customer[]> => {
-    return await this.prisma.customer.findMany();
-  };
+  create({ address, email, name, phoneNumber }: CreateCustomerInput) {
+    return this.prisma.customer.create({
+      data: { address, email, name, phoneNumber },
+    });
+  }
 
-  getOne = async (id: string): Promise<Customer> => {
-    return await this.prisma.customer.findUnique({ where: { id } });
-  };
+  findAll() {
+    return this.prisma.customer.findMany();
+  }
 
-  createOne = async (userData: Prisma.CustomerCreateInput): Promise<Customer> => {
-    return await this.prisma.customer.create({ data: userData });
-  };
+  findOne(id: string) {
+    return this.prisma.customer.findUnique({ where: { id } });
+  }
+
+  update(
+    id: string,
+    { address, email, name, phoneNumber }: UpdateCustomerInput,
+  ) {
+    return this.prisma.customer.update({
+      where: { id },
+      data: { address, email, name, phoneNumber },
+    });
+  }
+
+  remove(id: string) {
+    return this.prisma.customer.delete({ where: { id } });
+  }
 }
