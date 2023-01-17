@@ -1,0 +1,12 @@
+type AccessToken {
+  access_token: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+type Query {
+  login(loginInput: LoginUserInput!): AccessToken!
+}

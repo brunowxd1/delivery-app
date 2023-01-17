@@ -8,6 +8,12 @@ type User {
   phoneNumber: String!
   createdAt: Date!
   updatedAt: Date!
+  role: Role!
+}
+
+enum Role {
+  USER,
+  ADMIN
 }
 
 type AddressType {
@@ -42,6 +48,7 @@ input CreateUserInput {
   name: String!
   address: CreateUserAddressInput!
   phoneNumber: String!
+  password: String!
 }
 
 input UpdateUserInput {
@@ -52,6 +59,12 @@ input UpdateUserInput {
   phoneNumber: String
 }
 
+input UpdatePasswordInput {
+  id: ID!
+  oldPassword: String!
+  newPassword: String!
+}
+
 type Query {
   users: [User]!
   user(id: ID!): User
@@ -60,5 +73,6 @@ type Query {
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
+  updateUserPassword(updateUserPasswordInput: UpdatePasswordInput!): User!
   removeUser(id: ID!): User
 }

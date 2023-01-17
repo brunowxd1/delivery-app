@@ -8,6 +8,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum Role {
+    USER = "USER",
+    ADMIN = "ADMIN"
+}
+
+export class LoginUserInput {
+    email: string;
+    password: string;
+}
+
 export class CreateUserAddressInput {
     street: string;
     city: string;
@@ -31,6 +41,7 @@ export class CreateUserInput {
     name: string;
     address: CreateUserAddressInput;
     phoneNumber: string;
+    password: string;
 }
 
 export class UpdateUserInput {
@@ -41,6 +52,24 @@ export class UpdateUserInput {
     phoneNumber?: Nullable<string>;
 }
 
+export class UpdatePasswordInput {
+    id: string;
+    oldPassword: string;
+    newPassword: string;
+}
+
+export class AccessToken {
+    access_token: string;
+}
+
+export abstract class IQuery {
+    abstract login(loginInput: LoginUserInput): AccessToken | Promise<AccessToken>;
+
+    abstract users(): Nullable<User>[] | Promise<Nullable<User>[]>;
+
+    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
 export class User {
     id: string;
     email: string;
@@ -49,6 +78,7 @@ export class User {
     phoneNumber: string;
     createdAt: Date;
     updatedAt: Date;
+    role: Role;
 }
 
 export class AddressType {
@@ -60,16 +90,12 @@ export class AddressType {
     coordinates: string[];
 }
 
-export abstract class IQuery {
-    abstract users(): Nullable<User>[] | Promise<Nullable<User>[]>;
-
-    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
-}
-
 export abstract class IMutation {
     abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 
     abstract updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
+
+    abstract updateUserPassword(updateUserPasswordInput: UpdatePasswordInput): User | Promise<User>;
 
     abstract removeUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
