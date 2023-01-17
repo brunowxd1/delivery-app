@@ -5,7 +5,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CustomerModule } from './customer/customer.module';
+import { UserModule } from './user/user.module';
 import { PrismaModule } from './resources/prisma/prisma.module';
 
 @Module({
@@ -21,7 +21,7 @@ import { PrismaModule } from './resources/prisma/prisma.module';
       },
     }),
     PrismaModule,
-    CustomerModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,6 +1,6 @@
 scalar Date
 
-type Customer {
+type User {
   id: ID!
   email: String!
   name: String!
@@ -19,7 +19,7 @@ type AddressType {
   coordinates: [String!]!
 }
 
-input CreateCustomerAddressInput {
+input CreateUserAddressInput {
   street: String!
   city: String!
   state: String!
@@ -28,7 +28,7 @@ input CreateCustomerAddressInput {
   coordinates: [String!]!
 }
 
-input UpdateCustomerAddressInput {
+input UpdateUserAddressInput {
   street: String
   city: String
   state: String
@@ -37,28 +37,28 @@ input UpdateCustomerAddressInput {
   coordinates: [String!]
 }
 
-input CreateCustomerInput {
+input CreateUserInput {
   email: String!
   name: String!
-  address: CreateCustomerAddressInput!
+  address: CreateUserAddressInput!
   phoneNumber: String!
 }
 
-input UpdateCustomerInput {
+input UpdateUserInput {
   id: ID!
   email: String
   name: String
-  address: CreateCustomerAddressInput
+  address: CreateUserAddressInput
   phoneNumber: String
 }
 
 type Query {
-  customers: [Customer]!
-  customer(id: ID!): Customer
+  users: [User]!
+  user(id: ID!): User
 }
 
 type Mutation {
-  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
-  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
-  removeCustomer(id: ID!): Customer
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: ID!): User
 }

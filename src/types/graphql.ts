@@ -8,7 +8,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export class CreateCustomerAddressInput {
+export class CreateUserAddressInput {
     street: string;
     city: string;
     state: string;
@@ -17,7 +17,7 @@ export class CreateCustomerAddressInput {
     coordinates: string[];
 }
 
-export class UpdateCustomerAddressInput {
+export class UpdateUserAddressInput {
     street?: Nullable<string>;
     city?: Nullable<string>;
     state?: Nullable<string>;
@@ -26,22 +26,22 @@ export class UpdateCustomerAddressInput {
     coordinates?: Nullable<string[]>;
 }
 
-export class CreateCustomerInput {
+export class CreateUserInput {
     email: string;
     name: string;
-    address: CreateCustomerAddressInput;
+    address: CreateUserAddressInput;
     phoneNumber: string;
 }
 
-export class UpdateCustomerInput {
+export class UpdateUserInput {
     id: string;
     email?: Nullable<string>;
     name?: Nullable<string>;
-    address?: Nullable<CreateCustomerAddressInput>;
+    address?: Nullable<CreateUserAddressInput>;
     phoneNumber?: Nullable<string>;
 }
 
-export class Customer {
+export class User {
     id: string;
     email: string;
     name: string;
@@ -61,17 +61,17 @@ export class AddressType {
 }
 
 export abstract class IQuery {
-    abstract customers(): Nullable<Customer>[] | Promise<Nullable<Customer>[]>;
+    abstract users(): Nullable<User>[] | Promise<Nullable<User>[]>;
 
-    abstract customer(id: string): Nullable<Customer> | Promise<Nullable<Customer>>;
+    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export abstract class IMutation {
-    abstract createCustomer(createCustomerInput: CreateCustomerInput): Customer | Promise<Customer>;
+    abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 
-    abstract updateCustomer(updateCustomerInput: UpdateCustomerInput): Customer | Promise<Customer>;
+    abstract updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
 
-    abstract removeCustomer(id: string): Nullable<Customer> | Promise<Nullable<Customer>>;
+    abstract removeUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 type Nullable<T> = T | null;
