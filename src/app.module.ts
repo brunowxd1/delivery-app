@@ -9,6 +9,8 @@ import { UserModule } from './user/user.module';
 import { PrismaModule } from './shared/db/prisma/prisma.module';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './authorization/jwt/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
         path: join(process.cwd(), 'src/shared/types/graphql.ts'),
         outputAs: 'class',
       },
+      context: ({ req }) => ({ req }),
     }),
     PrismaModule,
     UserModule,
@@ -28,6 +31,6 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {provide: APP_GUARD, useClass: JwtAuthGuard}],
 })
 export class AppModule {}

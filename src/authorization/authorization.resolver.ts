@@ -1,4 +1,4 @@
-import { Args, Resolver, Query} from '@nestjs/graphql';
+import { Args, Resolver, Query } from '@nestjs/graphql';
 import { LoginUserInput } from 'src/shared/types/graphql';
 import { AuthorizationService } from './authorization.service';
 

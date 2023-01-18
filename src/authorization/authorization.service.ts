@@ -15,7 +15,6 @@ export class AuthorizationService {
   login = async ({ email, password }: LoginUserInput) => {
     const user = await this.prisma.user.findUnique({ where: { email } });
 
-    console.log(user);
     if (!user)
       throw new HttpException('Wrong credentials', HttpStatus.BAD_REQUEST);
 

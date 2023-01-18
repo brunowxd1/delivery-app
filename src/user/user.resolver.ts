@@ -1,4 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Public } from 'src/shared/decorators/publicRoute.decorator';
 import {
   CreateUserInput,
   UpdatePasswordInput,
@@ -11,6 +12,7 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Mutation('createUser')
+  @Public()
   create(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.userService.create(createUserInput);
   }
